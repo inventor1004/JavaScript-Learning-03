@@ -1,5 +1,4 @@
 'use strict';
-'use strict';
 
 /* DOM: Document Object Model */
 /* The DOM allows us to use JavaScript to access HTML elememts and styles in order to manipulate them*/
@@ -67,7 +66,11 @@ value);
 document.querySelector('.check').addEventListener('click', function() {getInput(ranNum)});
 
 
-/*
- 
 
-*/
+/***** CSS Manipukation *************************************/
+// change the background color
+document.querySelector('body').style.backgroundColor = '#60b347';
+// change the number properties' style and color
+document.querySelector('.number').style.width = '30rem';
+document.querySelector('.number').style.color = 'black';
+
