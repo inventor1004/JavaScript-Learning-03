@@ -11,7 +11,8 @@ document.querySelector('.message').textContent = 'New Player!';
 document.querySelector('.number').textContent = '?';
 document.querySelector('.score').value = 20;
 document.querySelector('.score').textContent = 20;
-document.querySelector('.guess').value = 0;
+document.querySelector('.guess').value = '';
+document.querySelector('.highscore').value = 0;
 
 
 
@@ -31,24 +32,21 @@ function getInput (ranNum)
     document.querySelector('.message').textContent = 'Correct Number. You Win!';
     document.querySelector('.number').textContent = ranNum;
 
-    document.querySelector('.highscore').textContent = score;
-  }
-  else if (guess < ranNum) {
-    if (score > 0){
-      document.querySelector('.message').textContent = 'It is higher than that number!';
-
-    --score;
-    document.querySelector('.score').textContent = score;
+    if ( score > highScore) {
+      document.querySelector('.highscore').textContent = score;
+      highScore = score;
     }
+
   }
-  else if (guess > ranNum) {
+  else if(guess !== ranNum ) {
     if (score > 0){
-      document.querySelector('.message').textContent = 'It is lower than that number!';
+      document.querySelector('.message').textContent = guess < ranNum ? 'It is higher than that number!' : 'It is lower than that number!';
 
       --score;
       document.querySelector('.score').textContent = score;
     }
   }
+  
   
   if (score === 0)
   {
@@ -62,13 +60,12 @@ function newGame() {
   // initialzing the properties
   score = 20;
   ranNum = Math.trunc(Math.random() * 20) + 1;
-
+  console.log('New random number ' + ranNum);
   // initialzing the text messages
   document.querySelector('.message').textContent = 'New Player!';
   document.querySelector('.number').textContent = '?';
   document.querySelector('.score').textContent = '20';
-  document.querySelector('.highscore').textContent = '0';
-
+  document.querySelector('.guess').value = '';
 }
 // method '.addEventListener' need function as a second parameter.
 // It adds certain event on the webpage based on the condition which the second function argument has
@@ -79,7 +76,9 @@ let ranNum = Math.trunc(Math.random() * 20) + 1;
 console.log(ranNum);
 
 // declare the variable score
-let score = Number(document.querySelector('.score').value); 
+let score = Number(document.querySelector('.score').value);
+
+let highScore = 0;
 
 // add the event which perform the guessing game
 document.querySelector('.check').addEventListener('click', function() {getInput(ranNum)});
