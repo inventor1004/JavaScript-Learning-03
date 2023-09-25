@@ -14,6 +14,7 @@ document.querySelector('.score').textContent = 20;
 document.querySelector('.guess').value = 0;
 
 
+
 /***** Events **********************************************/
 /**  Getting user input **/
 // create function for which we want to perform certain envent on the web page
@@ -23,6 +24,7 @@ function getInput (ranNum)
   const guess = Number(document.querySelector('.guess').
   value); 
   console.log(guess, typeof guess)  
+
 
   // display accurate text based on the game rule
   if (guess === ranNum) {
@@ -55,22 +57,43 @@ function getInput (ranNum)
 
 }
 
+
+function newGame() {
+  // initialzing the properties
+  score = 20;
+  ranNum = Math.trunc(Math.random() * 20) + 1;
+
+  // initialzing the text messages
+  document.querySelector('.message').textContent = 'New Player!';
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.score').textContent = '20';
+  document.querySelector('.highscore').textContent = '0';
+
+}
 // method '.addEventListener' need function as a second parameter.
 // It adds certain event on the webpage based on the condition which the second function argument has
 // In below case, it log the user entered value when the button '.check' is clicked 
-let ranNum = Math.trunc(Math.random() * 20) + 1;
-document.querySelector('.number').textContent = ranNum;
-let score = Number(document.querySelector('.score').
-value); 
 
+// ganerating the random number
+let ranNum = Math.trunc(Math.random() * 20) + 1;
+console.log(ranNum);
+
+// declare the variable score
+let score = Number(document.querySelector('.score').value); 
+
+// add the event which perform the guessing game
 document.querySelector('.check').addEventListener('click', function() {getInput(ranNum)});
 
+// add the event which perform play again the game when the user selects the 'Again!' button
+document.querySelector('.again').addEventListener('click',function() {newGame()});
 
 
 /***** CSS Manipukation *************************************/
 // change the background color
 document.querySelector('body').style.backgroundColor = '#60b347';
-// change the number properties' style and color
+// change the class properties' style and color
 document.querySelector('.number').style.width = '30rem';
 document.querySelector('.number').style.color = 'black';
+
+document.querySelector('.message').style.fontSize = '3rem';
 
